@@ -1,0 +1,1 @@
+# svelte-search-widget
