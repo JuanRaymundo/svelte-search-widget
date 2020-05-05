@@ -7,7 +7,7 @@ import { terser } from 'rollup-plugin-terser';
 const production = !process.env.ROLLUP_WATCH;
 
 export default {
-	input: 'components/Search.svelte',
+	input: 'main.js',
 	output: {
 		sourcemap: true,
 		format: 'iife',
@@ -16,7 +16,6 @@ export default {
 	},
 	plugins: [
 		svelte({
-			customElement: true,
 			// enable run-time checks when not in production
 			dev: !production,
 			// we'll extract any component CSS out into
