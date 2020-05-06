@@ -1,4 +1,6 @@
 <script>
+  export let id = '';
+  export let label = '';
   export let value = '';
 
   function handleInput({ target }) {
@@ -6,10 +8,7 @@
   }
 </script>
 
-<style>
-  input {
-    display: block;
-  }
-</style>
-
-<input type="text" value={value} on:input={handleInput}/>
+<div>
+  <label for={id}>{label}</label>
+  <input id={id} type="text" value={value} on:input={handleInput}/>
+</div>

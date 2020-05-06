@@ -1,5 +1,6 @@
 <script>
 	import Flex from '../ui/Flex.svelte';
+	import DateInput from './DateInput.svelte';
 	import PlaceInput from './PlaceInput.svelte';
 	import delay from '../utils/delay';
 
@@ -17,16 +18,34 @@
 
 <Flex>
 	<Flex>
-		<PlaceInput label="Origen" bind:value={origin} source={source} />
+		<PlaceInput
+			id="origin-field"
+			label="Origen"
+			bind:value={origin}
+			source={source}
+		/>
 	</Flex>
 	<Flex>
-		<PlaceInput label="Destino" bind:value={destination} source={source} />
+		<PlaceInput
+			id="destination-field"
+			label="Destino"
+			bind:value={destination}
+			source={source}
+		/>
 	</Flex>
 	<Flex>
-		<input type="date" bind:value={departs} />
+		<DateInput
+			id="departs-field"
+			label="Salida"
+			bind:value={departs}
+		/>
 	</Flex>
 	<Flex>
-		<input type="date" bind:value={returns} />
+		<DateInput
+			id="returns-field"
+			label="Regreso"
+			bind:value={returns}
+		/>
 	</Flex>
 </Flex>
 
