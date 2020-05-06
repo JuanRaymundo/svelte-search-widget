@@ -6,4 +6,10 @@
   }
 </script>
 
+<style>
+  input {
+    display: block;
+  }
+</style>
+
 <input type="text" value={value} on:input={handleInput}/>
