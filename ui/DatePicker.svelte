@@ -1,6 +1,7 @@
 <script>
   import { createEventDispatcher } from "svelte";
   import { getMonthName } from "../utils/date-time.js";
+  import onOutsideClick from '../utils/onOutsideClick';
   import Calendar from "./Calendar.svelte";
 
   const dispatch = createEventDispatcher();
@@ -13,6 +14,7 @@
   let month;
   let year;
   let showDatePicker;
+  let datePickerElement;
 
   $: selected = value || new Date();
   $: display = value ? value.toDateString() : '';
@@ -54,6 +56,10 @@
   const onDateChange = ({ detail }) => {
     setDate(detail);
   };
+
+  onOutsideClick(() => datePickerElement, () => {
+    showDatePicker = false;
+  });
 </script>
 
 <style>
@@ -83,9 +89,14 @@
 </style>
 
 <div class="relative">
-  <input type="text" on:focus={onFocus} value={display} />
+  <input
+    type="text"
+    on:focus={onFocus}
+    on:mouseup|stopPropagation
+    value={display}
+  />
   {#if showDatePicker}
-    <div class="box">
+    <div class="box" bind:this={datePickerElement}>
       <div class="month-name">
         <div class="center">
           <button on:click={prev}>{'<'}</button>
