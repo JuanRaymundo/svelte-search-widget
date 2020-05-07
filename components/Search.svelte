@@ -2,9 +2,9 @@
 	import Flex from '../ui/Flex.svelte';
 	import DateInput from './DateInput.svelte';
 	import PlaceInput from './PlaceInput.svelte';
-	import delay from '../utils/delay';
 
-	export let source = 'www.reservamos.mx/api/v2/places';
+	// TODO: uncomment default props before merge, while put default values at index.html
+	export let source; // = 'https://www.reservamos.mx/api/v2/places';
 
 	let origin = null;
 	let destination = null;
