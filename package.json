@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "build": "rollup -c",
-    "dev": "rollup -c -w"
+    "dev": "rollup -c -w",
+    "start": "echo \"port: $PORT\" & sirv public --port $PORT"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "11.0.2",
