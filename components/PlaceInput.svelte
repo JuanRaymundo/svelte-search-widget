@@ -21,16 +21,17 @@
   let showList = false;
 
   // autocomplete
-  const malamule = new Malamute({
+  const malamute = new Malamute({
     idetify: item => item.slug,
     remote: {
       url: source,
     },
     request: q => ({ q }),
+    prefetch: () => ({ prefetch: true }),
   });
 
   async function handleInput({ target }) {
-    results = await malamule.search(target.value);
+    results = await malamute.search(target.value);
   }
 
   onOutsideClick(() => listElement, () => {

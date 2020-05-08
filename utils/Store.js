@@ -14,21 +14,21 @@ export default class Store {
   read(path) {
     if (!this._store) return null;
 
-    const key = [this.prefix, ...path].join('.');
+    const key = [this._prefix, ...path].join('.');
     return this._store.getItem(key);
   }
 
   write(path, value) {
     if (!this._store) return null;
 
-    const key = [this.prefix, ...path].join('.');
+    const key = [this._prefix, ...path].join('.');
     this._store.setItem(key, value)
   }
 
   readAllFrom(path) {
     if (!this._store) return {};
 
-    const root = [this.prefix, ...path].join('.');
+    const root = [this._prefix, ...path].join('.');
 
     return Object
       .keys(this._store)
