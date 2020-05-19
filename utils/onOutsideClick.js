@@ -1,10 +1,16 @@
 import { onMount } from 'svelte';
 
-export default function onOutsideClick (getEl, callback) {
+export default function onOutsideClick (getElements, callback) {
   async function handleDocumentClick (event) {
     event.stopPropagation();
-    const el = getEl();
-    if (el && !el.contains(event.target)) {
+    const elements = getElements();
+    if (!elements) return;
+
+    const isInside = elements instanceof Array
+      ? elements.some(el => el && el.contains(event.target))
+      : elements.contains(event.target);
+
+    if (!isInside) {
       callback(event);
     }
   }

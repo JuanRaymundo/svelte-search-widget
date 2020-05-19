@@ -15,6 +15,7 @@
   let year;
   let showDatePicker;
   let datePickerElement;
+  let inputElement;
 
   $: selected = value || new Date();
   $: display = value ? value.toDateString() : '';
@@ -57,7 +58,7 @@
     setDate(detail);
   };
 
-  onOutsideClick(() => datePickerElement, () => {
+  onOutsideClick(() => [datePickerElement, inputElement], () => {
     showDatePicker = false;
   });
 </script>
@@ -92,8 +93,8 @@
   <input
     type="text"
     on:focus={onFocus}
-    on:mouseup|stopPropagation
     value={display}
+    bind:this={inputElement}
   />
   {#if showDatePicker}
     <div class="box" bind:this={datePickerElement}>
