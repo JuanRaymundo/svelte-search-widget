@@ -1,5 +1,6 @@
 <script>
   import Malamute from '../utils/Malamute';
+  import debounce from '../utils/debounce';
   import onOutsideClick from '../utils/onOutsideClick';
 
   //constants
@@ -16,8 +17,9 @@
   export let source;
 
   // state
-  let results = [];
   let listElement;
+  let inputElement;
+  let results = [];
   let showList = false;
 
   // autocomplete
@@ -30,11 +32,11 @@
     prefetch: () => ({ prefetch: true }),
   });
 
-  async function handleInput({ target }) {
+  const onInput = debounce(async ({ target }) => {
     results = await malamute.search(target.value);
-  }
+  });
 
-  onOutsideClick(() => listElement, () => {
+  onOutsideClick(() => [listElement, inputElement], () => {
     showList = false;
   })
 </script>
@@ -66,9 +68,9 @@
     id={id}
     type="text"
     value={value}
-    on:input={handleInput}
-    on:mouseup|stopPropagation
+    on:input={onInput}
     on:focus={() => showList = true}
+    bind:this={inputElement}
   />
   {#if showList}
     <ul bind:this={listElement}>
