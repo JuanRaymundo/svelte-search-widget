@@ -15,6 +15,7 @@
   export let label = '';
   export let value = '';
   export let source;
+  export let hasError = false;
 
   // state
   let listElement;
@@ -42,6 +43,10 @@
 </script>
 
 <style>
+  input.hasError {
+    border: solid 1px red;
+  }
+
   ul {
     padding: 0px;
     box-shadow: 0 10px 15px rgba(0,0,0,.15), 0 0 20px rgba(0,0,0, 0.2);
@@ -68,6 +73,7 @@
     id={id}
     type="text"
     value={value}
+    class:hasError
     on:input={onInput}
     on:focus={() => showList = true}
     bind:this={inputElement}

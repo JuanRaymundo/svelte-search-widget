@@ -9,6 +9,7 @@
   // props
   export let isAllowed = () => true;
   export let value;
+  export let hasError = false;
 
   // state
   let month;
@@ -64,6 +65,10 @@
 </script>
 
 <style>
+  .hasError {
+    border: solid 1px red;
+  }
+
   .relative {
     position: relative;
   }
@@ -95,6 +100,7 @@
     on:focus={onFocus}
     value={display}
     bind:this={inputElement}
+    class:hasError
   />
   {#if showDatePicker}
     <div class="box" bind:this={datePickerElement}>
