@@ -33,9 +33,15 @@
     prefetch: () => ({ prefetch: true }),
   });
 
-  const onInput = debounce(async ({ target }) => {
+  async function onInput({ target }) {
     results = await malamute.search(target.value);
-  });
+  };
+
+  function onSelect(place) {
+    value = place.slug;
+    inputElement.focus();
+    showList = false;
+  }
 
   onOutsideClick(() => [listElement, inputElement], () => {
     showList = false;
@@ -74,17 +80,17 @@
     type="text"
     value={value}
     class:hasError
-    on:input={onInput}
+    on:input={debounce(onInput)}
     on:focus={() => showList = true}
     bind:this={inputElement}
   />
   {#if showList}
     <ul bind:this={listElement}>
-      {#each results.slice(0, 10) as { display, result_type, slug, state }}
-        <li on:click={() => value = slug}>
-          <img src={icons[result_type]} alt={result_type} />
-          <b>{state}</b>
-          {result_type === 'city' ? 'Todas las terminales' : display}
+      {#each results.slice(0, 10) as place}
+        <li on:click={() => onSelect(place)}>
+          <img src={icons[place.result_type]} alt={place.result_type} />
+          <b>{place.city_name}</b>
+          {place.result_type === 'city' ? 'Todas las terminales' : place.display}
         </li>
       {/each}
     </ul>
