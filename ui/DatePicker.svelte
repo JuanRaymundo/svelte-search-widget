@@ -10,6 +10,7 @@
   export let isAllowed = () => true;
   export let value;
   export let hasError = false;
+  export let id;
 
   // state
   let month;
@@ -96,6 +97,7 @@
 
 <div class="relative">
   <input
+    id={id}
     type="text"
     on:focus={onFocus}
     value={display}

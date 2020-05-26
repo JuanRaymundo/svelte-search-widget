@@ -1,8 +1,8 @@
 function serializePassengers (passengers) {
   const adults = `A${passengers.adults}`;
-  const infants = passengers.infants ? `-I${passengers.infants}` : '';
+  const children = passengers.children ? `-I${passengers.children}` : '';
 
-  return `${adults}${infants}`;
+  return `${adults}${children}`;
 }
 const months = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
 
@@ -13,7 +13,16 @@ function serializeDate (date) {
   return `${day}-${month}-${year}`;
 }
 
-function makePathSegments ({ origin, destination, departs, returns, passengers, tripType }) {
+function makePathSegments ({
+  origin,
+  destination,
+  departs,
+  returns,
+  tripType,
+  adults,
+  children,
+  infants,
+}) {
   const segments = [
     'search',
     origin,
@@ -27,7 +36,7 @@ function makePathSegments ({ origin, destination, departs, returns, passengers, 
 
   segments.push(
     'p',
-    serializePassengers(passengers),
+    serializePassengers({ adults, children, infants }),
     'providers',
   );
 
