@@ -1,6 +1,7 @@
 <script>
   import Malamute from '../utils/Malamute';
   import debounce from '../utils/debounce';
+  import getPlaceDisplay from '../utils/getPlaceDisplay';
   import onOutsideClick from '../utils/onOutsideClick';
 
   //constants
@@ -12,7 +13,7 @@
 
   // props
   export let placeholder = '';
-  export let value = '';
+  export let place = '';
   export let source;
   export let hasError = false;
 
@@ -33,14 +34,17 @@
   });
 
   async function onInput({ target }) {
+    showList = true;
     results = await malamute.search(target.value);
   };
 
-  function onSelect(place) {
-    value = place.slug;
+  function onSelect(selectedPlace) {
+    place = selectedPlace;
     inputElement.focus();
     showList = false;
   }
+
+  // other events
 
   onOutsideClick(() => [listElement, inputElement], () => {
     showList = false;
@@ -76,7 +80,7 @@
   <input
     placeholder={placeholder}
     type="text"
-    value={value}
+    value={getPlaceDisplay(place)}
     class:hasError
     on:input={debounce(onInput)}
     on:focus={() => showList = true}

@@ -4,14 +4,6 @@ function serializePassengers (passengers) {
 
   return `${adults}${children}`;
 }
-const months = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
-
-function serializeDate (date) {
-  const day = date.getDate();
-  const month = months[date.getMonth()];
-  const year = `${date.getFullYear()}`.slice(-2);
-  return `${day}-${month}-${year}`;
-}
 
 function makePathSegments ({
   origin,
@@ -27,11 +19,11 @@ function makePathSegments ({
     'search',
     origin,
     destination,
-    serializeDate(departs),
+    departs,
   ];
 
   if (tripType === 'round') {
-    segments.push(serializeDate(returns));
+    segments.push(returns);
   }
 
   segments.push(

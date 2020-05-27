@@ -1,4 +1,4 @@
-export default function validateForm({ origin, destination, departs, returns, tripType }) {
+export default function validateFields({ origin, destination, departs, returns, tripType }) {
   return {
     origin: !origin,
     destination: !destination,

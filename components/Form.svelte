@@ -1,6 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-	import validateForm from '../utils/validateForm';
+	import validateFields from '../utils/validateFields';
+	import serializeFields from '../utils/serializeFields';
 	import makeRedirectUrl from '../utils/makeRedirectUrl';
 	import Flex from '../ui/Flex.svelte';
 	import Button from '../ui/Button.svelte';
@@ -37,11 +38,11 @@
 	// handlers
 	let errors = {};
 	function handleSubmit () {
-		errors = validateForm(fields);
+		errors = validateFields(fields);
 		const hasErrors = Object.values(errors).some(error => error);
-    if (hasErrors) return;
-    
-    dispatch('submit', fields);
+
+    if (hasErrors) return;    
+    dispatch('submit', serializeFields(fields));
 	}
 
 	$: console.log(origin, destination, departs, returns);
@@ -54,7 +55,7 @@
 				placeholder="Origen"
 				source={config.source}
 				hasError={errors.origin}
-				bind:value={origin}
+				bind:place={origin}
 			/>
 		{/await}
 	</Flex>
@@ -64,7 +65,7 @@
 				placeholder="Destino"
 				source={config.source}
 				hasError={errors.destination}
-				bind:value={destination}
+				bind:place={destination}
 			/>
 		{/await}
 	</Flex>

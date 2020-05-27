@@ -10,7 +10,7 @@
 
 	// handlers
 
-	function onSubmit (fields) {
+	function onSubmit ({ detail: fields }) {
 		const url = makeRedirectUrl(fields, config);
 		window.open(url);
 	}
