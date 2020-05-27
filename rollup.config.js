@@ -7,13 +7,21 @@ import { terser } from 'rollup-plugin-terser';
 const production = !process.env.ROLLUP_WATCH;
 
 export default {
-	input: 'main.js',
-	output: {
-		sourcemap: true,
-		format: 'iife',
-		name: 'app',
-		file: 'public/build/bundle.js'
-	},
+	input: 'search.js',
+	output: [
+		// ES module version, for modern browsers
+    {
+      dir: "public/module",
+      format: "es",
+			sourcemap: true,
+    },
+    // SystemJS version, for older browsers
+    {
+      dir: "public/nomodule",
+      format: "system",
+      sourcemap: true
+    },
+  ],
 	plugins: [
 		svelte({
 			// enable run-time checks when not in production
@@ -21,8 +29,8 @@ export default {
 			// we'll extract any component CSS out into
 			// a separate file - better for performance
 			css: css => {
-				css.write('public/build/bundle.css');
-			}
+				css.write('public/styles/bundle.css');
+			},
 		}),
 
 		// If you have external dependencies installed from

@@ -4,8 +4,8 @@
 	import makeRedirectUrl from '../utils/makeRedirectUrl';
 	import Flex from '../ui/Flex.svelte';
 	import Button from '../ui/Button.svelte';
-	import DateInput from './DateInput.svelte';
-  import PlaceInput from './PlaceInput.svelte';
+	const DateInputPromise = import('./DateInput.svelte').then(module => module.default);
+	const PlaceInputPromise = import('./PlaceInput.svelte').then(module => module.default);
   
   const dispatch = createEventDispatcher();
 
@@ -49,38 +49,42 @@
 
 <Flex>
 	<Flex>
-		<PlaceInput
-			id="origin-field"
-			label="Origen"
-			source={config.source}
-			hasError={errors.origin}
-			bind:value={origin}
-		/>
+		{#await PlaceInputPromise then PlaceInput}
+			<PlaceInput
+				placeholder="Origen"
+				source={config.source}
+				hasError={errors.origin}
+				bind:value={origin}
+			/>
+		{/await}
 	</Flex>
 	<Flex>
-		<PlaceInput
-			id="destination-field"
-			label="Destino"
-			source={config.source}
-			hasError={errors.destination}
-			bind:value={destination}
-		/>
+		{#await PlaceInputPromise then PlaceInput}
+			<PlaceInput
+				placeholder="Destino"
+				source={config.source}
+				hasError={errors.destination}
+				bind:value={destination}
+			/>
+		{/await}
 	</Flex>
 	<Flex>
-		<DateInput
-			id="departs-field"
-			label="Salida"
-			hasError={errors.departs}
-			bind:value={departs}
-		/>
+		{#await DateInputPromise then DateInput}
+			<DateInput
+				placeholder="Salida"
+				hasError={errors.departs}
+				bind:value={departs}
+			/>
+		{/await}
 	</Flex>
 	<Flex>
-		<DateInput
-			id="returns-field"
-			label="Regreso"
-			hasError={errors.returns}
-			bind:value={returns}
-		/>
+		{#await DateInputPromise then DateInput}
+			<DateInput
+				placeholder="Regreso"
+				hasError={errors.returns}
+				bind:value={returns}
+			/>
+		{/await}
 	</Flex>
 	<Flex>
 		<Button on:click={handleSubmit}>Buscar</Button>

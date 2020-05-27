@@ -11,8 +11,7 @@
   }
 
   // props
-  export let id = '';
-  export let label = '';
+  export let placeholder = '';
   export let value = '';
   export let source;
   export let hasError = false;
@@ -56,7 +55,7 @@
   ul {
     padding: 0px;
     box-shadow: 0 10px 15px rgba(0,0,0,.15), 0 0 20px rgba(0,0,0, 0.2);
-
+    position: absolute;
   }
 
   li {
@@ -74,9 +73,8 @@
 </style>
 
 <div>
-  <label for={id}>{label}</label>
   <input
-    id={id}
+    placeholder={placeholder}
     type="text"
     value={value}
     class:hasError
