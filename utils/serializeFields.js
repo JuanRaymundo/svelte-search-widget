@@ -26,11 +26,23 @@ function serializeDate (date) {
   return `${day}-${month}-${year}`;
 }
 
-export default function serializeFields({ origin, destination, departs, returns, tripType }) {
+export default function serializeFields({
+  origin,
+  destination,
+  departs,
+  returns,
+  // tripType,
+  adults,
+  children,
+  infants,
+}) {
   return {
     origin: serializePlace(origin),
     destination: serializePlace(destination),
     departs: serializeDate(departs),
     returns: serializeDate(returns),
+    adults,
+    children,
+    infants,
   };
 }

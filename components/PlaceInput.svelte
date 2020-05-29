@@ -3,6 +3,7 @@
   import debounce from '../utils/debounce';
   import getPlaceDisplay from '../utils/getPlaceDisplay';
   import onOutsideClick from '../utils/onOutsideClick';
+  import Card from '../ui/Card.svelte';
 
   //constants
   const icons = {
@@ -58,13 +59,12 @@
 
   ul {
     padding: 0px;
-    box-shadow: 0 10px 15px rgba(0,0,0,.15), 0 0 20px rgba(0,0,0, 0.2);
-    position: absolute;
+    margin: 0px;
   }
 
   li {
     list-style-type: none;
-    padding-bottom: 10px;
+    padding: 5px 10px;
   }
 
   li:last-child {
@@ -86,15 +86,17 @@
     on:focus={() => showList = true}
     bind:this={inputElement}
   />
-  {#if showList}
-    <ul bind:this={listElement}>
-      {#each results.slice(0, 10) as place}
-        <li on:click={() => onSelect(place)}>
-          <img src={icons[place.result_type]} alt={place.result_type} />
-          <b>{place.city_name}</b>
-          {place.result_type === 'city' ? 'Todas las terminales' : place.display}
-        </li>
-      {/each}
-    </ul>
+  {#if showList && results.length}
+    <Card absolute flat>
+      <ul bind:this={listElement}>
+        {#each results.slice(0, 10) as place}
+          <li on:click={() => onSelect(place)}>
+            <img src={icons[place.result_type]} alt={place.result_type} />
+            <b>{place.city_name}</b>
+            {place.result_type === 'city' ? 'Todas las terminales' : place.display}
+          </li>
+        {/each}
+      </ul>
+    </Card>
   {/if}
 </div>

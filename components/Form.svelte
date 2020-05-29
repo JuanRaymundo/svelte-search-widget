@@ -2,11 +2,11 @@
   import { createEventDispatcher } from 'svelte';
 	import validateFields from '../utils/validateFields';
 	import serializeFields from '../utils/serializeFields';
-	import makeRedirectUrl from '../utils/makeRedirectUrl';
 	import Flex from '../ui/Flex.svelte';
 	import Button from '../ui/Button.svelte';
 	const DateInputPromise = import('./DateInput.svelte').then(module => module.default);
 	const PlaceInputPromise = import('./PlaceInput.svelte').then(module => module.default);
+	const PassengersInputPromise = import('./PassengersInput.svelte').then(module => module.default);
   
   const dispatch = createEventDispatcher();
 
@@ -45,7 +45,9 @@
     dispatch('submit', serializeFields(fields));
 	}
 
-	$: console.log(origin, destination, departs, returns);
+	$: console.log({ departs, returns });
+	$: console.log({ origin, destination });
+	$: console.log({ adults, children, infants });
 </script>
 
 <Flex>
@@ -88,7 +90,15 @@
 		{/await}
 	</Flex>
 	<Flex>
+		{#await PassengersInputPromise then PassengersInput}
+			<PassengersInput
+				bind:adults={adults}
+				bind:children={children}
+				bind:infants={infants}
+			/>
+		{/await}
+	</Flex>
+	<Flex>
 		<Button on:click={handleSubmit}>Buscar</Button>
 	</Flex>
 </Flex>
-
