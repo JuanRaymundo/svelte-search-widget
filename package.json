@@ -4,7 +4,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "echo \"port: $PORT\" & sirv public --port $PORT"
+    "start": "echo \"port: $PORT\" && sleep 10 && sirv public --port ${PORT:-3000}"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "11.0.2",
