@@ -1,3 +1,20 @@
+# Search component
+this is the result of personal growth, developing a search widget with svelte [preview](https://search-component.herokuapp.com/)
+
+## Implementation
+
+```html
+  <link rel='stylesheet' href='/styles/bundle.css'>
+  <script defer src="module/search.js" type="module"></script>
+  <script defer src="nomodule/search.js" nomodule></script>
+</head>
+<body>
+  <search-component
+  	source="https://www.reservamos.mx/api/v2/places"
+    funnel="https://viaje.resertravel.com"
+  ></search-component>
+```
+
 *Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
 
 ---
