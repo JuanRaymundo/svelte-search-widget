@@ -45,6 +45,10 @@
     dispatch('submit', serializeFields(fields));
 	}
 
+	function changeTripType ({ target }) {
+		tripType = target.checked ? 'round' : 'oneWay';
+	}
+
 	$: console.log({ departs, returns });
 	$: console.log({ origin, destination });
 	$: console.log({ adults, children, infants });
@@ -80,15 +84,17 @@
 			/>
 		{/await}
 	</Flex>
-	<Flex>
-		{#await DateInputPromise then DateInput}
-			<DateInput
-				placeholder="Regreso"
-				hasError={errors.returns}
-				bind:value={returns}
-			/>
-		{/await}
-	</Flex>
+	{#if tripType === 'round'}
+		<Flex>
+			{#await DateInputPromise then DateInput}
+				<DateInput
+					placeholder="Regreso"
+					hasError={errors.returns}
+					bind:value={returns}
+				/>
+			{/await}
+		</Flex>
+	{/if}
 	<Flex>
 		{#await PassengersInputPromise then PassengersInput}
 			<PassengersInput
@@ -102,3 +108,8 @@
 		<Button on:click={handleSubmit}>Buscar</Button>
 	</Flex>
 </Flex>
+
+<label>
+	<input type="checkbox" on:change={changeTripType} />
+	Viaje redondo
+</label>

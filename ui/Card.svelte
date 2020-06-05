@@ -6,6 +6,7 @@
 
 <style>
   div {
+    background-color: #FFF;
     box-shadow: 0 10px 15px rgba(0,0,0,.15), 0 0 20px rgba(0,0,0, 0.2);
     border-radius: 5px;
     padding: 15px;
@@ -13,6 +14,7 @@
 
   .absolute {
     position: absolute;
+    z-index: 1;
   }
 
   .flat {
