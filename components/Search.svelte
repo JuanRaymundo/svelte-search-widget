@@ -1,19 +1,19 @@
 <script>
-	import makeRedirectUrl from '../utils/makeRedirectUrl';
-	import Form from './Form.svelte';
+  import makeRedirectUrl from '../utils/makeRedirectUrl';
+  import Form from './Form.svelte';
 
-	// props
+  // props
 
-	export let source; // = 'https://www.reservamos.mx/api/v2/places';
-	export let funnel; // = 'https://viaje.resertravel.com/';
-	$: config = { funnel, source };
+  export let source; // = 'https://www.reservamos.mx/api/v2/places';
+  export let funnel; // = 'https://viaje.resertravel.com/';
+  $: config = { funnel, source };
 
-	// handlers
+  // handlers
 
-	function onSubmit ({ detail: fields }) {
-		const url = makeRedirectUrl(fields, config);
-		window.open(url);
-	}
+  function onSubmit ({ detail: fields }) {
+    const url = makeRedirectUrl(fields, config);
+    window.open(url);
+  }
 </script>
 
 <Form config={config} on:submit={onSubmit} />

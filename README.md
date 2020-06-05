@@ -10,7 +10,7 @@ this is the result of personal growth, developing a search widget with svelte [p
 </head>
 <body>
   <search-component
-  	source="https://www.reservamos.mx/api/v2/places"
+    source="https://www.reservamos.mx/api/v2/places"
     funnel="https://viaje.resertravel.com"
   ></search-component>
 ```
